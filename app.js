@@ -3,9 +3,11 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 // const MongoStore = require('connect-mongo')(session);
+// const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const socket = require('socket.io');
 const port = 8000;
 
 mongoose.connect('mongodb://localhost/chat-app', { useNewUrlParser: true }, function(err, connection) {
@@ -45,6 +47,10 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(require('webpack-hot-middleware')(compiler));
 }
 
+// app.use(passport.initialize());
+// app.use(passport.session());
+// require('./server/modules/passport')(passport);
+
 app.use(cors());
 
 app.use('/api', require('./server/routes/api'));
@@ -53,3 +59,9 @@ app.use(require('./server/routes/index'));
 app.listen(port, () => {
 	console.log(`server is running on http://localhost:${port}`);
 });
+
+server = app.listen(port, () => {
+	console.log(`server is running on http://localhost:${port}`);
+});
+
+const io = socket(server);
