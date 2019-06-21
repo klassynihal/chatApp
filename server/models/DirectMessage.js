@@ -9,7 +9,7 @@ const DirectMessageSchema = new Schema(
 		message: String,
 		sentiment: { type: String, default: 'N/A' }, //SAD,HAPPY,NEUTRAL,N/A are available Sentiments
 		isRead: { type: Boolean, default: false },
-		isDelete: { type: Boolean, default: false },
+		isDeleted: { type: Boolean, default: false },
 		Counter: Number
 	},
 	{ timestamps: true }
