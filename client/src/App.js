@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.scss';
 import { verifyTokenAction } from './store/actions'; //figure out verify
+import Main from './components/Main';
 // import Main from './components/Main';
 
 class App extends Component {
@@ -22,7 +23,11 @@ class App extends Component {
 	// };
 
 	render() {
-		return <div className="App">chatApp</div>;
+		return (
+			<div className="App">
+				<Main />
+			</div>
+		);
 	}
 }
 
