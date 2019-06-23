@@ -2,6 +2,7 @@ import { util } from '../../util';
 
 export function registerUserAction(data, cb) {
 	return (dispatch) => {
+		console.log(data, 'reg Action');
 		fetch(`${util.baseURL}/register`, {
 			method: 'POST',
 			headers: {

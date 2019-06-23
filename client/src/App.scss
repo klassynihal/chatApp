@@ -1,3 +1,13 @@
-// h1{
-//   font-size: 80px;
-// }
+@import "./index.scss";
+@import "./components/Header/header.scss";
+@import "./components/Footer/footer.scss";
+@import "./components/Home/home.scss";
+@import "./components/Login/Login.scss";
+@import "./components/Message/message.scss";
+@import "./components/NoMatch/noMatch.scss";
+@import "./components/Register/Register.scss";
+
+.App {
+  background: $base1-color;
+  color: $text1-color;
+}

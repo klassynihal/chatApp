@@ -2,7 +2,7 @@ const INIT_STATE = {
 	currentUser: null,
 	currentToken: localStorage.getItem('chatAppJWT') || null,
 	isAuth: false,
-	message: ''
+	message: 'test'
 };
 
 export default function User(state = INIT_STATE, action) {
@@ -30,13 +30,14 @@ export default function User(state = INIT_STATE, action) {
 				isAuth: false
 			};
 
-		case 'VERIFY_USER': {
+		case 'VERIFY_USER':
 			return {
 				...state,
 				currentUser: action.user,
 				isAuth: true
 			};
-		}
+		case 'CLEAR_MESSAGE':
+			return { ...state, message: null };
 		// break;
 		default:
 			return state;

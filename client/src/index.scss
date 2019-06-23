@@ -1,0 +1,42 @@
+$base1-color: #501532;
+$base2-color: #0f2925;
+$text1-color: #cb2d6f;
+$text2-color: #ccc;
+$btn1-color: #14a098;
+$btn2-color: #c6538c;
+
+.base1-color {
+  background: $base1-color;
+}
+.base2-color {
+  background: $base2-color;
+}
+.text1-color {
+  background: $text1-color;
+}
+.text2-color {
+  background: $text2-color;
+}
+.btn1-color {
+  background: $btn1-color;
+}
+.btn2-color {
+  background: $btn1-color;
+}
+.primary-btn {
+  border: 1px solid $text1-color;
+  color: $text1-color;
+  &:hover {
+    background: $text1-color;
+    color: $text2-color;
+  }
+}
+.secondary-btn {
+  background: $btn1-color;
+  border: 1px solid $btn1-color;
+  color: $base2-color;
+  &:hover {
+    background: lighten($btn1-color, 15%);
+    color: $base2-color;
+  }
+}

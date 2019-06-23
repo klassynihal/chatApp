@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const SALT_FACTOR = 10;
 
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
 	name: { type: String, required: true },
 	username: { type: String, unique: true, required: true },
 	email: { type: String, unique: true, required: true },
@@ -12,15 +13,19 @@ const userSchema = new Schema({
 	friends: [ { type: ObjectId, ref: 'User' } ]
 });
 
-userSchema.methods.verifyPassword = function(userPassword, cb) {
+UserSchema.methods.verifyPassword = function(userPassword, cb) {
 	bcrypt.compare(userPassword, this.password, function(err, res) {
-		console.log(res, 'error');
 		if (err) cb(err, false);
 		cb(null, res);
 	});
 };
 
-userSchema.pre('save', function(next) {
+UserSchema.methods.comparePassword = function(userPassword) {
+	var result = bcrypt.compareSync(userPassword, this.password);
+	return result;
+};
+
+UserSchema.pre('save', function(next) {
 	var password = this.password;
 	var self = this;
 
@@ -34,6 +39,6 @@ userSchema.pre('save', function(next) {
 	});
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

@@ -2,8 +2,9 @@ const express = require('express');
 // const session = require('express-session');
 const app = express();
 const mongoose = require('mongoose');
+const logger = require('morgan');
 // const MongoStore = require('connect-mongo')(session);
-// const passport = require('passport');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -32,6 +33,8 @@ app.set('view engine', 'ejs');
 // 	})
 // );
 
+app.use(logger('dev'));
+
 if (process.env.NODE_ENV === 'development') {
 	var webpack = require('webpack');
 	var webpackConfig = require('./webpack.config');
@@ -47,13 +50,11 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(require('webpack-hot-middleware')(compiler));
 }
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// require('./server/modules/passport')(passport);
+require('./server/config/passport')(passport);
 
 app.use(cors());
 
-app.use('/api', require('./server/routes/api'));
+app.use('/api/v1', require('./server/routes/api'));
 app.use(require('./server/routes/index'));
 
 server = app.listen(port, () => {

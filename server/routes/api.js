@@ -2,9 +2,14 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controllers');
 const privateMessageController = require('../controllers/privateMessage.controller');
-const auth = require('../modules/auth');
+const auth = require('../config/auth');
 
-router.post('/signup', userController.signup);
+express().use((req, res, next) => {
+	console.log('test');
+	next();
+});
+
+router.post('/register', userController.register);
 
 router.post('/login', userController.login);
 
